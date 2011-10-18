@@ -5,9 +5,9 @@ set -e
 
 source bbndk.env
 
-export DEV_ROOT=`pwd`
+DEV_ROOT=`pwd`
 pushd ..
-export ERLANG_ROOT=`pwd`
+ERLANG_ROOT=`pwd`
 popd
 
 if [ ! -d "build" ]; then
@@ -25,8 +25,8 @@ fi
 
 popd
 
-export LINUX_BUILD=$DEV_ROOT/build/linux
-export PLAYBOOK_PREFIX=$DEV_ROOT/build/PlayBook
+LINUX_BUILD=$DEV_ROOT/build/linux
+PLAYBOOK_PREFIX=$DEV_ROOT/build/PlayBook
 
 
 ###########################################################################
