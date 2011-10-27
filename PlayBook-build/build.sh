@@ -5,6 +5,11 @@ set -e
 
 source bbndk.env
 
+# ensure required BBNDK env variables are set
+: ${BBNDK_DIR:?"Error: BBNDK_DIR environment variable is not set."}
+: ${BBNDK_HOST:?"Error: BBNDK_HOST environment variable is not set."}
+: ${BBNDK_TARGET:?"Error: BBNDK_TARGET environment variable is not set."}
+
 DEV_ROOT=`pwd`
 pushd ..
 ERLANG_ROOT=`pwd`
@@ -70,11 +75,6 @@ popd
 ###########################################################################
 # Setup PlayBook Environment Variables                                    #
 ###########################################################################
-
-# ensure required BBNDK env variables are set
-: ${BBNDK_DIR:?"Error: BBNDK_DIR environment variable is not set."}
-: ${BBNDK_HOST:?"Error: BBNDK_HOST environment variable is not set."}
-: ${BBNDK_TARGET:?"Error: BBNDK_TARGET environment variable is not set."}
 
 #set up env for cross-compiling for PlayBook
 export PATH=$BBNDK_HOST/usr/bin:$PATH
