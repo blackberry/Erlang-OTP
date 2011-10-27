@@ -109,7 +109,7 @@ erl_xcomp_gethrvtime_procfs_ioctl=no \
 erl_xcomp_clock_gettime_cpu_time=yes \
 erl_xcomp_after_morecore_hook=no \
 erl_xcomp_dlsym_brk_wrappers=yes \
-./configure --build=i686-pc-linux-gnu --host=arm-unknown-nto-qnx6.5.0eabi --prefix=$PLAYBOOK_PREFIX/Erlang --disable-hipe --without-termcap --with-ssl=$BBNDK_TARGET/usr/include/openssl
+./configure --build=i686-pc-linux-gnu --host=arm-unknown-nto-qnx6.5.0eabi --prefix=$PLAYBOOK_PREFIX/Erlang --disable-hipe --with-ssl=$BBNDK_TARGET/usr/include/openssl
 
 # comment out -lrt in <ERL_TOP>/erts/emulator/arm-unknown-nto-qnx6.5.0eabi/Makefile (this causes a build error)
 pushd erts/emulator/arm-unknown-nto-qnx6.5.0eabi
