@@ -95,7 +95,7 @@ CPPFLAGS="-D__PLAYBOOK__ -D__QNXNTO__ -DNO_SYSLOG -DLOG_ERR=1 -DSIZEOF_VOID_P=4 
 LDFLAGS="-L$BBNDK_TARGET/armle-v7/lib -L$BBNDK_TARGET/armle-v7/usr/lib -lm -lsocket " \
 erl_xcomp_sysroot=$BBNDK_TARGET/armle-v7 \
 erl_xcomp_isysroot=$BBNDK_TARGET/usr/include \
-erl_xcomp_bigendian=yes \
+erl_xcomp_bigendian=no \
 erl_xcomp_linux_clock_gettime_correction=yes \
 erl_xcomp_linux_nptl=yes \
 erl_xcomp_linux_usable_sigusrx=yes \
