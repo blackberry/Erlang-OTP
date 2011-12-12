@@ -7,12 +7,9 @@ build_erlang_for_playbook()
     ###########################################################################
     set -e
 
-    source bbndk.env
-
     # ensure required BBNDK env variables are set
-    : ${BBNDK_DIR:?"Error: BBNDK_DIR environment variable is not set."}
-    : ${BBNDK_HOST:?"Error: BBNDK_HOST environment variable is not set."}
-    : ${BBNDK_TARGET:?"Error: BBNDK_TARGET environment variable is not set."}
+    : ${QNX_HOST:?"Error: QNX_HOST environment variable is not set."}
+    : ${QNX_TARGET:?"Error: QNX_TARGET environment variable is not set."}
 
     local BUILD_ROOT=`pwd`
     pushd ..
@@ -63,12 +60,12 @@ build_erlang_for_playbook()
     ###########################################################################
 
     #set up env for cross-compiling for PlayBook
-    export PATH=$BBNDK_HOST/usr/bin:$PATH
-    export CC="$BBNDK_HOST/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp "
+    export PATH=$QNX_HOST/usr/bin:$PATH
+    export CC="$QNX_HOST/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp "
     export CFLAGS="-V4.4.2,gcc_ntoarmv7le_cpp -g "
-    export CPP="$BBNDK_HOST/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp -E"
-    export LD="$BBNDK_HOST/usr/bin/ntoarmv7-ld "
-    export RANLIB="$BBNDK_HOST/usr/bin/ntoarmv7-ranlib "
+    export CPP="$QNX_HOST/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp -E"
+    export LD="$QNX_HOST/usr/bin/ntoarmv7-ld "
+    export RANLIB="$QNX_HOST/usr/bin/ntoarmv7-ranlib "
 
 
 
@@ -77,10 +74,10 @@ build_erlang_for_playbook()
     ###########################################################################
     pushd $ERLANG_ROOT
 
-    CPPFLAGS="-D__PLAYBOOK__ -D__QNXNTO__ -DNO_SYSLOG -DLOG_ERR=1 -DSIZEOF_VOID_P=4 -I$BBNDK_TARGET/usr/include " \
-    LDFLAGS="-L$BBNDK_TARGET/armle-v7/lib -L$BBNDK_TARGET/armle-v7/usr/lib -lm -lsocket " \
-    erl_xcomp_sysroot=$BBNDK_TARGET/armle-v7 \
-    erl_xcomp_isysroot=$BBNDK_TARGET/usr/include \
+    CPPFLAGS="-D__PLAYBOOK__ -D__QNXNTO__ -DNO_SYSLOG -DLOG_ERR=1 -DSIZEOF_VOID_P=4 -I$QNX_TARGET/usr/include " \
+    LDFLAGS="-L$QNX_TARGET/armle-v7/lib -L$QNX_TARGET/armle-v7/usr/lib -lm -lsocket " \
+    erl_xcomp_sysroot=$QNX_TARGET/armle-v7 \
+    erl_xcomp_isysroot=$QNX_TARGET/usr/include \
     erl_xcomp_bigendian=no \
     erl_xcomp_linux_clock_gettime_correction=yes \
     erl_xcomp_linux_nptl=yes \
@@ -95,7 +92,7 @@ build_erlang_for_playbook()
     erl_xcomp_clock_gettime_cpu_time=yes \
     erl_xcomp_after_morecore_hook=no \
     erl_xcomp_dlsym_brk_wrappers=yes \
-    ./configure --build=i686-pc-linux-gnu --host=arm-unknown-nto-qnx6.5.0eabi --prefix=$BUILD_ROOT/Erlang --disable-hipe --with-ssl=$BBNDK_TARGET/usr/include/openssl
+    ./configure --build=i686-pc-linux-gnu --host=arm-unknown-nto-qnx6.5.0eabi --prefix=$BUILD_ROOT/Erlang --disable-hipe --with-ssl=$QNX_TARGET/usr/include/openssl
 
     # comment out -lrt in <ERL_TOP>/erts/emulator/arm-unknown-nto-qnx6.5.0eabi/Makefile (this causes a build error)
     pushd erts/emulator/arm-unknown-nto-qnx6.5.0eabi
