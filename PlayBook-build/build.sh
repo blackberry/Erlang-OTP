@@ -66,8 +66,7 @@ build_erlang_for_playbook()
     export CPP="$QNX_HOST/usr/bin/qcc -V4.4.2,gcc_ntoarmv7le_cpp -E"
     export LD="$QNX_HOST/usr/bin/ntoarmv7-ld "
     export RANLIB="$QNX_HOST/usr/bin/ntoarmv7-ranlib "
-
-
+    export AR="$QNX_HOST/usr/bin/ntoarmv7-ar "
 
     ###########################################################################
     # Build Erlang For PlayBook                                               #
